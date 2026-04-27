@@ -1,0 +1,893 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MARKA — Criatividade e Inovação</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:wght@300;400;600;700&family=Barlow+Condensed:wght@700;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --blue: #2233FF;
+    --blue-light: #3A4FFF;
+    --black: #0A0A0A;
+    --dark: #111111;
+    --dark2: #1A1A1A;
+    --white: #FFFFFF;
+    --grey: #FFFFFF;
+    --grey-light: #FFFFFF;
+  }
+
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { background: var(--black); color: var(--white); font-family: 'Barlow', sans-serif; overflow-x: hidden; }
+
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 9999;
+    opacity: 0.35;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.2rem 6%;
+    background: rgba(10,10,10,0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+  }
+
+  .nav-logo { display: flex; align-items: center; gap: 0.7rem; text-decoration: none; }
+  .nav-logo-icon { width: 36px; height: 36px; }
+  .nav-brand { font-family: 'Bebas Neue', sans-serif; font-size: 1.8rem; letter-spacing: 0.12em; color: var(--white); }
+  .nav-brand span { color: var(--blue); }
+
+  nav ul { list-style: none; display: flex; gap: 2.5rem; }
+  nav ul a {
+    text-decoration: none;
+    color: var(--grey-light);
+    font-size: 0.82rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    transition: color 0.25s;
+    cursor: pointer;
+  }
+  nav ul a:hover { color: var(--blue); }
+
+  .nav-cta {
+    background: var(--blue);
+    color: var(--white) !important;
+    padding: 0.55rem 1.4rem;
+    clip-path: polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%);
+    transition: background 0.25s !important;
+  }
+  .nav-cta:hover { background: var(--blue-light) !important; color: var(--white) !important; }
+
+  /* HERO */
+  #hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    position: relative;
+    padding: 0 6%;
+    overflow: hidden;
+  }
+
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 60% 60% at 70% 50%, rgba(34,51,255,0.18) 0%, transparent 70%),
+      radial-gradient(ellipse 40% 40% at 20% 80%, rgba(34,51,255,0.08) 0%, transparent 60%);
+  }
+
+  .hero-grid {
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+    background-size: 60px 60px;
+  }
+
+  .hero-content { position: relative; z-index: 2; max-width: 700px; }
+
+  .hero-tag {
+    display: inline-block;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--blue);
+    border: 1px solid rgba(34,51,255,0.4);
+    padding: 0.3rem 0.9rem;
+    margin-bottom: 1.8rem;
+    animation: fadeUp 0.8s ease both;
+  }
+
+  .hero-title {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: clamp(4rem, 9vw, 8rem);
+    font-weight: 900;
+    line-height: 0.92;
+    text-transform: uppercase;
+    letter-spacing: -0.02em;
+    animation: fadeUp 0.8s 0.15s ease both;
+  }
+  .hero-title .blue { color: var(--blue); }
+
+  .hero-subtitle {
+    margin-top: 1.8rem;
+    font-size: 1.1rem;
+    font-weight: 300;
+    color: var(--grey-light);
+    line-height: 1.7;
+    max-width: 500px;
+    animation: fadeUp 0.8s 0.3s ease both;
+  }
+
+  .hero-actions { display: flex; gap: 1rem; margin-top: 2.5rem; animation: fadeUp 0.8s 0.45s ease both; }
+
+  .btn-primary {
+    display: inline-block;
+    background: var(--blue);
+    color: var(--white);
+    text-decoration: none;
+    font-size: 0.82rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    padding: 0.9rem 2.2rem;
+    clip-path: polygon(10px 0%, 100% 0%, calc(100% - 10px) 100%, 0% 100%);
+    transition: transform 0.2s, background 0.2s;
+    cursor: pointer;
+    border: none;
+  }
+  .btn-primary:hover { background: var(--blue-light); transform: translateY(-2px); }
+
+  .btn-outline {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    border: 1px solid rgba(255,255,255,0.2);
+    color: var(--white);
+    text-decoration: none;
+    font-size: 0.82rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    padding: 0.9rem 2rem;
+    transition: border-color 0.2s, color 0.2s;
+    cursor: pointer;
+  }
+  .btn-outline:hover { border-color: var(--blue); color: var(--blue); }
+
+  .hero-visual {
+    position: absolute;
+    right: 4%;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 420px;
+    animation: fadeIn 1.2s 0.5s ease both;
+    opacity: 0.85;
+  }
+
+  .hero-stats {
+    display: flex;
+    gap: 3rem;
+    margin-top: 3.5rem;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(255,255,255,0.07);
+    animation: fadeUp 0.8s 0.6s ease both;
+  }
+
+  .stat-num { font-family: 'Bebas Neue', sans-serif; font-size: 2.4rem; color: var(--blue); line-height: 1; }
+  .stat-label { font-size: 0.72rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--grey); margin-top: 0.25rem; }
+
+  /* SECTIONS */
+  section { padding: 7rem 6%; }
+
+  .section-tag {
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--blue);
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    margin-bottom: 1rem;
+  }
+  .section-tag::before { content: ''; display: block; width: 30px; height: 2px; background: var(--blue); }
+
+  .section-title {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: -0.01em;
+    line-height: 1;
+    margin-bottom: 1rem;
+  }
+  .section-title span { color: var(--blue); }
+
+  /* SERVICES */
+  #servicos { background: var(--dark); }
+
+  .services-intro {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: end;
+    margin-bottom: 4rem;
+  }
+
+  .services-desc { font-size: 1rem; font-weight: 300; color: var(--grey-light); line-height: 1.8; }
+
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5px;
+    background: rgba(255,255,255,0.06);
+  }
+
+  .service-card {
+    background: var(--dark);
+    padding: 2.5rem;
+    position: relative;
+    overflow: hidden;
+    cursor: default;
+    transition: background 0.3s;
+  }
+  .service-card::before {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0;
+    width: 100%; height: 3px;
+    background: var(--blue);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.35s ease;
+  }
+  .service-card:hover { background: var(--dark2); }
+  .service-card:hover::before { transform: scaleX(1); }
+
+  .service-num { font-family: 'Bebas Neue', sans-serif; font-size: 3.5rem; color: rgba(34,51,255,0.12); line-height: 1; margin-bottom: 1rem; transition: color 0.3s; }
+  .service-card:hover .service-num { color: rgba(34,51,255,0.25); }
+  .service-icon { margin-bottom: 1rem; display: flex; align-items: center; }
+  .service-name { font-family: 'Barlow Condensed', sans-serif; font-size: 1.4rem; font-weight: 900; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.7rem; color: var(--white); }
+  .service-desc { font-size: 0.88rem; font-weight: 300; color: rgba(255,255,255,0.75); line-height: 1.7; }
+  .service-arrow { position: absolute; bottom: 1.5rem; right: 1.5rem; font-size: 1.2rem; color: var(--blue); opacity: 0; transform: translateX(-8px); transition: opacity 0.3s, transform 0.3s; }
+  .service-card:hover .service-arrow { opacity: 1; transform: translateX(0); }
+
+  /* PORTFOLIO */
+  #portfolio { background: var(--black); }
+
+  .portfolio-filter { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 3rem; }
+
+  .filter-btn {
+    background: transparent;
+    border: 1px solid rgba(255,255,255,0.12);
+    color: rgba(255,255,255,0.7);
+    font-family: 'Barlow', sans-serif;
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 0.5rem 1.2rem;
+    cursor: pointer;
+    transition: all 0.25s;
+  }
+  .filter-btn:hover, .filter-btn.active {
+    background: var(--blue);
+    border-color: var(--blue);
+    color: var(--white);
+  }
+
+  /* Portfolio grid */
+  .portfolio-grid {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: 1.5px;
+    background: rgba(255,255,255,0.05);
+  }
+
+  .port-item {
+    overflow: hidden;
+    position: relative;
+    cursor: pointer;
+    transition: opacity 0.4s ease, transform 0.4s ease;
+  }
+
+  /* Hidden state for filtered items */
+  .port-item.hidden {
+    display: none;
+  }
+
+  .port-item:nth-child(1) { grid-column: span 7; grid-row: span 2; }
+  .port-item:nth-child(2) { grid-column: span 5; }
+  .port-item:nth-child(3) { grid-column: span 5; }
+  .port-item:nth-child(4) { grid-column: span 4; }
+  .port-item:nth-child(5) { grid-column: span 4; }
+  .port-item:nth-child(6) { grid-column: span 4; }
+
+  /* When items are hidden, re-layout visible ones */
+  .portfolio-grid.filtered .port-item:not(.hidden) { grid-column: span 6; grid-row: span 1; }
+  .portfolio-grid.filtered .port-item:not(.hidden):first-of-type { grid-column: span 12; }
+
+  .port-visual {
+    width: 100%;
+    height: 100%;
+    min-height: 220px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.5s ease;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 900;
+    font-size: 1.1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+  .port-item:hover .port-visual { transform: scale(1.04); }
+
+  .pv-1 { background: linear-gradient(135deg, #0a0a2e 0%, #1a1a4e 40%, var(--blue) 100%); flex-direction: column; gap: 0.5rem; min-height: 460px; }
+  .pv-2 { background: linear-gradient(135deg, #111 0%, #1a1a1a 100%); min-height: 220px; }
+  .pv-3 { background: linear-gradient(160deg, #0e0e0e, #1c1c3a); min-height: 220px; }
+  .pv-4 { background: linear-gradient(135deg, #080820, #1a2a5e); min-height: 220px; }
+  .pv-5 { background: linear-gradient(135deg, #0d0d0d, #162040); min-height: 220px; }
+  .pv-6 { background: linear-gradient(135deg, #0a0a1a, var(--blue) 200%); min-height: 220px; }
+
+  .mock-poster { width: 160px; height: 220px; border: 2px solid rgba(255,255,255,0.15); background: linear-gradient(160deg, #1a2050, #0d0d2e); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0.5rem; padding: 1rem; position: relative; }
+  .mock-poster::after { content: ''; position: absolute; inset: 0; background: linear-gradient(transparent 60%, rgba(34,51,255,0.3)); }
+  .mock-bar { width: 80%; height: 3px; background: var(--blue); }
+  .mock-bar.thin { height: 1px; opacity: 0.4; }
+
+  .mock-card { width: 140px; height: 80px; background: linear-gradient(135deg, #111, #1a1a3a); border: 1px solid rgba(34,51,255,0.3); border-radius: 4px; display: flex; flex-direction: column; justify-content: space-between; padding: 0.7rem; }
+  .mc-line { height: 2px; background: rgba(255,255,255,0.2); width: 70%; }
+  .mc-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--blue); }
+
+  .mock-web { width: 200px; height: 130px; background: #0e0e14; border: 1px solid rgba(255,255,255,0.08); border-radius: 4px; overflow: hidden; }
+  .mw-bar { height: 22px; background: #1a1a2e; display: flex; align-items: center; gap: 4px; padding: 0 8px; }
+  .mw-dot { width: 6px; height: 6px; border-radius: 50%; }
+  .mw-body { padding: 8px; display: flex; flex-direction: column; gap: 4px; }
+  .mw-line { height: 4px; background: rgba(255,255,255,0.1); border-radius: 2px; }
+  .mw-blue { background: rgba(34,51,255,0.4) !important; width: 60%; }
+
+  .mock-banner { width: 200px; height: 80px; background: linear-gradient(90deg, #0d1240, #2233FF); display: flex; align-items: center; justify-content: space-between; padding: 0 1.2rem; border: 1px solid rgba(255,255,255,0.1); }
+  .mock-logo-sm { font-family: 'Bebas Neue', sans-serif; font-size: 1rem; letter-spacing: 0.15em; }
+
+  .port-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(transparent 40%, rgba(0,0,0,0.85));
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 1.5rem;
+    opacity: 0;
+    transition: opacity 0.35s;
+  }
+  .port-item:hover .port-overlay { opacity: 1; }
+  .port-cat { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--blue); margin-bottom: 0.3rem; }
+  .port-title-ov { font-family: 'Barlow Condensed', sans-serif; font-size: 1.2rem; font-weight: 900; text-transform: uppercase; letter-spacing: 0.05em; }
+
+  /* PROCESS */
+  #processo { background: var(--dark); position: relative; overflow: hidden; }
+  #processo::before { content: ''; position: absolute; top: -200px; right: -200px; width: 600px; height: 600px; border-radius: 50%; background: radial-gradient(ellipse, rgba(34,51,255,0.1), transparent 70%); pointer-events: none; }
+
+  .process-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; margin-top: 3rem; }
+  .process-steps { display: flex; flex-direction: column; gap: 0; }
+
+  .process-step {
+    display: flex;
+    gap: 1.5rem;
+    padding: 2rem 0;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    cursor: default;
+    transition: padding-left 0.3s;
+  }
+  .process-step:hover { padding-left: 0.5rem; }
+
+  .step-num { font-family: 'Bebas Neue', sans-serif; font-size: 3rem; color: rgba(34,51,255,0.2); line-height: 1; flex-shrink: 0; transition: color 0.3s; }
+  .process-step:hover .step-num { color: rgba(34,51,255,0.5); }
+  .step-content h3 { font-family: 'Barlow Condensed', sans-serif; font-size: 1.3rem; font-weight: 900; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.4rem; }
+  .step-content p { font-size: 0.88rem; color: rgba(255,255,255,0.75); line-height: 1.7; font-weight: 300; }
+
+  .process-visual { position: relative; display: flex; align-items: center; justify-content: center; }
+  .proc-ring { width: 280px; height: 280px; border-radius: 50%; border: 1px solid rgba(34,51,255,0.25); display: flex; align-items: center; justify-content: center; position: relative; animation: spin 20s linear infinite; }
+  .proc-ring::before { content: ''; position: absolute; inset: -20px; border-radius: 50%; border: 1px dashed rgba(34,51,255,0.12); }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  .proc-center { animation: spin 20s linear infinite reverse; display: flex; flex-direction: column; align-items: center; gap: 0.4rem; }
+  .proc-m { font-family: 'Bebas Neue', sans-serif; font-size: 4rem; color: var(--blue); line-height: 1; }
+  .proc-label { font-size: 0.65rem; letter-spacing: 0.2em; font-weight: 700; text-transform: uppercase; color: rgba(255,255,255,0.7); }
+  .proc-dot { position: absolute; width: 10px; height: 10px; border-radius: 50%; background: var(--blue); box-shadow: 0 0 12px var(--blue); top: -5px; left: 50%; transform: translateX(-50%); }
+
+  /* CTA */
+  #contato { background: var(--black); text-align: center; padding: 8rem 6%; position: relative; overflow: hidden; }
+  #contato::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 70% 70% at 50% 50%, rgba(34,51,255,0.12), transparent 70%); }
+
+  .cta-title { font-family: 'Barlow Condensed', sans-serif; font-size: clamp(3rem, 6vw, 5.5rem); font-weight: 900; text-transform: uppercase; letter-spacing: -0.01em; line-height: 1; position: relative; margin-bottom: 1.5rem; }
+  .cta-title span { color: var(--blue); }
+  .cta-sub { font-size: 1.05rem; color: rgba(255,255,255,0.8); font-weight: 300; max-width: 500px; margin: 0 auto 2.5rem; line-height: 1.7; position: relative; }
+  .cta-actions { display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap; position: relative; }
+
+  .contact-row { display: flex; justify-content: center; gap: 3rem; margin-top: 4rem; padding-top: 3rem; border-top: 1px solid rgba(255,255,255,0.06); flex-wrap: wrap; position: relative; }
+  .contact-item { display: flex; align-items: center; gap: 0.7rem; font-size: 0.88rem; color: var(--grey-light); font-weight: 300; }
+  .contact-icon { display: flex; align-items: center; flex-shrink: 0; }
+
+  /* FOOTER */
+  footer { background: var(--dark); border-top: 1px solid rgba(255,255,255,0.06); padding: 2.5rem 6%; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; }
+  .footer-brand { font-family: 'Bebas Neue', sans-serif; font-size: 1.4rem; letter-spacing: 0.15em; color: var(--white); }
+  .footer-brand span { color: var(--blue); }
+  .footer-copy { font-size: 0.78rem; color: rgba(255,255,255,0.5); letter-spacing: 0.06em; text-transform: uppercase; }
+  .footer-links { display: flex; gap: 1.5rem; list-style: none; }
+  .footer-links a { font-size: 0.78rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; text-decoration: none; color: var(--white); transition: color 0.2s; cursor: pointer; }
+  .footer-links a:hover { color: var(--blue); }
+
+  /* TICKER */
+  .slogan-bar { background: var(--blue); padding: 0.8rem 6%; display: flex; gap: 4rem; overflow: hidden; }
+  .slogan-ticker { display: flex; gap: 4rem; white-space: nowrap; animation: ticker 18s linear infinite; }
+  .slogan-item { font-family: 'Bebas Neue', sans-serif; font-size: 1rem; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(255,255,255,0.9); display: flex; align-items: center; gap: 1.5rem; }
+  .slogan-sep { color: rgba(255,255,255,0.4); font-size: 1.2rem; }
+  @keyframes ticker { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(28px); } to { opacity: 1; transform: translateY(0); } }
+  @keyframes fadeIn { from { opacity: 0; } to { opacity: 0.85; } }
+
+  /* MOBILE */
+  @media (max-width: 900px) {
+    nav ul { display: none; }
+    .hero-visual { display: none; }
+    .services-intro { grid-template-columns: 1fr; }
+    .services-grid { grid-template-columns: 1fr 1fr; }
+    .process-grid { grid-template-columns: 1fr; }
+    .proc-ring { display: none; }
+    .port-item:nth-child(1),
+    .port-item:nth-child(2),
+    .port-item:nth-child(3),
+    .port-item:nth-child(4),
+    .port-item:nth-child(5),
+    .port-item:nth-child(6) { grid-column: span 12; }
+    footer { flex-direction: column; text-align: center; }
+  }
+  @media (max-width: 600px) {
+    .services-grid { grid-template-columns: 1fr; }
+    .hero-stats { gap: 1.5rem; }
+  }
+
+  /* No results message */
+  .no-results {
+    display: none;
+    grid-column: span 12;
+    text-align: center;
+    padding: 4rem;
+    color: var(--grey);
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+  .no-results.visible { display: block; }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#hero" class="nav-logo">
+    <svg class="nav-logo-icon" viewBox="0 0 80 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <polyline points="5,55 30,10 50,40 70,10 75,20" stroke="#2233FF" stroke-width="7" stroke-linejoin="round" stroke-linecap="round" fill="none"/>
+      <polyline points="38,55 58,15 78,45" stroke="#333" stroke-width="6" stroke-linejoin="round" stroke-linecap="round" fill="none"/>
+    </svg>
+    <span class="nav-brand">MAR<span>KA</span></span>
+  </a>
+  <ul>
+    <li><a onclick="navTo('hero')">Início</a></li>
+    <li><a onclick="navTo('servicos')">Serviços</a></li>
+    <li><a onclick="navTo('portfolio')">Portfólio</a></li>
+    <li><a onclick="navTo('processo')">Processo</a></li>
+    <li><a onclick="navTo('contato')" class="nav-cta">Contacto</a></li>
+  </ul>
+</nav>
+
+<!-- SLOGAN TICKER -->
+<div class="slogan-bar" style="margin-top:64px">
+  <div class="slogan-ticker">
+    <span class="slogan-item">CRIATIVIDADE <span class="slogan-sep">✦</span></span>
+    <span class="slogan-item">INOVAÇÃO <span class="slogan-sep">✦</span></span>
+    <span class="slogan-item">DESIGN <span class="slogan-sep">✦</span></span>
+    <span class="slogan-item">IMPACTO <span class="slogan-sep">✦</span></span>
+    <span class="slogan-item">BRANDING <span class="slogan-sep">✦</span></span>
+    <span class="slogan-item">MARKA <span class="slogan-sep">✦</span></span>
+    <span class="slogan-item">CRIATIVIDADE <span class="slogan-sep">✦</span></span>
+    <span class="slogan-item">INOVAÇÃO <span class="slogan-sep">✦</span></span>
+    <span class="slogan-item">DESIGN <span class="slogan-sep">✦</span></span>
+    <span class="slogan-item">IMPACTO <span class="slogan-sep">✦</span></span>
+    <span class="slogan-item">BRANDING <span class="slogan-sep">✦</span></span>
+    <span class="slogan-item">MARKA <span class="slogan-sep">✦</span></span>
+  </div>
+</div>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <div class="hero-content">
+    <div class="hero-tag">Agência de Design &amp; Marketing Digital</div>
+    <h1 class="hero-title">
+      Criati<span class="blue">vi</span>dade<br>
+      &amp; Ino<span class="blue">vação</span>
+    </h1>
+    <p class="hero-subtitle">
+      Transformamos ideias em identidades visuais poderosas. Design gráfico profissional, desenvolvimento web e estratégias de marketing que fazem a sua marca destacar-se.
+    </p>
+    <div class="hero-actions">
+      <a onclick="navTo('servicos')" class="btn-primary">Ver Serviços</a>
+      <a onclick="navTo('portfolio')" class="btn-outline">Ver Portfólio →</a>
+    </div>
+    <div class="hero-stats">
+      <div><div class="stat-num">120+</div><div class="stat-label">Projectos</div></div>
+      <div><div class="stat-num">80+</div><div class="stat-label">Clientes</div></div>
+      <div><div class="stat-num">5+</div><div class="stat-label">Anos Exp.</div></div>
+    </div>
+  </div>
+  <div class="hero-visual">
+    <svg viewBox="0 0 500 420" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect x="60" y="180" width="380" height="200" fill="rgba(34,51,255,0.04)" rx="2"/>
+      <polyline points="60,350 160,90 250,240 340,90 440,350" stroke="#2233FF" stroke-width="18" stroke-linejoin="round" stroke-linecap="round" fill="none"/>
+      <polyline points="140,350 220,140 300,270 380,140 460,280" stroke="rgba(255,255,255,0.08)" stroke-width="14" stroke-linejoin="round" stroke-linecap="round" fill="none"/>
+      <text x="250" y="395" font-family="'Bebas Neue', sans-serif" font-size="68" fill="rgba(255,255,255,0.85)" text-anchor="middle" letter-spacing="16">MARKA</text>
+      <text x="250" y="418" font-family="'Barlow', sans-serif" font-size="11" fill="rgba(34,51,255,0.8)" text-anchor="middle" letter-spacing="5" font-weight="700">CRIATIVIDADE E INOVAÇÃO</text>
+      <line x1="60" y1="410" x2="200" y2="410" stroke="rgba(255,255,255,0.12)" stroke-width="1" stroke-dasharray="3,4"/>
+      <line x1="300" y1="410" x2="440" y2="410" stroke="rgba(255,255,255,0.12)" stroke-width="1" stroke-dasharray="3,4"/>
+    </svg>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="servicos">
+  <div class="services-intro">
+    <div>
+      <div class="section-tag">O Que Fazemos</div>
+      <h2 class="section-title">Nossos<br><span>Serviços</span></h2>
+    </div>
+    <p class="services-desc">
+      Da concepção à entrega final, a MARKA oferece soluções completas de design e comunicação visual para empresas que querem deixar uma marca duradoura no mercado.
+    </p>
+  </div>
+  <div class="services-grid">
+    <div class="service-card">
+      <div class="service-num">01</div>
+      <div class="service-icon">
+        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#2233FF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="13.5" cy="6.5" r="2.5"/><path d="M17 4a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2"/><path d="M8 12l3 3 5-5"/></svg>
+      </div>
+      <div class="service-name">Design Gráfico</div>
+      <p class="service-desc">Identidades visuais, logos, cartazes e materiais impressos com impacto visual único e memorável.</p>
+      <span class="service-arrow">→</span>
+    </div>
+
+    <div class="service-card">
+      <div class="service-num">02</div>
+      <div class="service-icon">
+        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#2233FF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+      </div>
+      <div class="service-name">Criação de Sites</div>
+      <p class="service-desc">Websites modernos, responsivos e optimizados para SEO que convertem visitantes em clientes.</p>
+      <span class="service-arrow">→</span>
+    </div>
+
+    <div class="service-card">
+      <div class="service-num">03</div>
+      <div class="service-icon">
+        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#2233FF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+      </div>
+      <div class="service-name">Sistemas de Gestão</div>
+      <p class="service-desc">Plataformas e sistemas digitais personalizados para automatizar e optimizar a gestão do seu negócio.</p>
+      <span class="service-arrow">→</span>
+    </div>
+
+    <div class="service-card">
+      <div class="service-num">04</div>
+      <div class="service-icon">
+        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#2233FF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/><path d="M9 21V9"/></svg>
+      </div>
+      <div class="service-name">Flyers &amp; Banners</div>
+      <p class="service-desc">Peças publicitárias que captam atenção — flyers, roll-ups, outdoors e banners digitais para todo suporte.</p>
+      <span class="service-arrow">→</span>
+    </div>
+
+    <div class="service-card">
+      <div class="service-num">05</div>
+      <div class="service-icon">
+        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#2233FF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/></svg>
+      </div>
+      <div class="service-name">Cartões de Visita</div>
+      <p class="service-desc">Cartões de visita premium que transmitem profissionalismo e deixam uma impressão duradoura.</p>
+      <span class="service-arrow">→</span>
+    </div>
+
+    <div class="service-card">
+      <div class="service-num">06</div>
+      <div class="service-icon">
+        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#2233FF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg>
+      </div>
+      <div class="service-name">Vídeos Publicitários</div>
+      <p class="service-desc">Produção de vídeos comerciais e conteúdos audiovisuais que contam a história da sua marca de forma impactante.</p>
+      <span class="service-arrow">→</span>
+    </div>
+
+    <div class="service-card" style="grid-column: span 3">
+      <div class="service-num">07</div>
+      <div class="service-icon">
+        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#2233FF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.4 2 2 0 0 1 3.6 1.22h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L7.91 8.85a16 16 0 0 0 6 6l.85-1.85a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 21.5 15h.42"/><path d="M15 2a5 5 0 0 1 5 5"/><path d="M15 6a1 1 0 0 1 1 1"/></svg>
+      </div>
+      <div class="service-name">Marketing Digital</div>
+      <p class="service-desc">Estratégias completas de marketing digital: gestão de redes sociais, campanhas pagas, conteúdo criativo e análise de resultados para fazer crescer a sua presença online.</p>
+      <span class="service-arrow">→</span>
+    </div>
+  </div>
+</section>
+
+<!-- PORTFOLIO -->
+<section id="portfolio">
+  <div class="section-tag">Os Nossos Trabalhos</div>
+  <h2 class="section-title" style="margin-bottom:2rem">Porto<span>fólio</span></h2>
+
+  <div class="portfolio-filter">
+    <button class="filter-btn active" data-filter="todos">Todos</button>
+    <button class="filter-btn" data-filter="design-grafico">Design Gráfico</button>
+    <button class="filter-btn" data-filter="website">Websites</button>
+    <button class="filter-btn" data-filter="video">Vídeo</button>
+    <button class="filter-btn" data-filter="marketing">Marketing</button>
+    <button class="filter-btn" data-filter="branding">Branding</button>
+  </div>
+
+  <div class="portfolio-grid" id="portfolioGrid">
+
+    <div class="port-item" data-category="design-grafico">
+      <div class="port-visual pv-1">
+        <div class="mock-poster">
+          <div class="mock-bar"></div>
+          <div style="font-family:'Bebas Neue',sans-serif;font-size:2rem;letter-spacing:0.1em;color:#fff;text-align:center;z-index:1">FESTIVAL<br>DE MÚSICA</div>
+          <div class="mock-bar thin"></div>
+          <div style="font-size:0.65rem;letter-spacing:0.2em;color:rgba(255,255,255,0.5);z-index:1">2024 · TETE</div>
+          <div class="mock-bar"></div>
+        </div>
+        <div style="font-size:0.7rem;letter-spacing:0.2em;color:rgba(255,255,255,0.4);margin-top:0.5rem">CARTAZ EVENTO</div>
+      </div>
+      <div class="port-overlay">
+        <div class="port-cat">Design Gráfico</div>
+        <div class="port-title-ov">Cartaz Festival de Música</div>
+      </div>
+    </div>
+
+    <div class="port-item" data-category="website">
+      <div class="port-visual pv-2" style="flex-direction:column;gap:1rem">
+        <div class="mock-web">
+          <div class="mw-bar">
+            <div class="mw-dot" style="background:#ff5f57"></div>
+            <div class="mw-dot" style="background:#febc2e"></div>
+            <div class="mw-dot" style="background:#28c840"></div>
+          </div>
+          <div class="mw-body">
+            <div class="mw-line mw-blue"></div>
+            <div class="mw-line" style="width:90%"></div>
+            <div class="mw-line" style="width:75%"></div>
+            <div class="mw-line" style="width:50%"></div>
+            <div class="mw-line mw-blue" style="margin-top:4px;width:40%"></div>
+          </div>
+        </div>
+        <div style="font-size:0.7rem;letter-spacing:0.2em;color:rgba(255,255,255,0.4)">WEBSITE CORPORATIVO</div>
+      </div>
+      <div class="port-overlay">
+        <div class="port-cat">Website</div>
+        <div class="port-title-ov">Site Corporativo</div>
+      </div>
+    </div>
+
+    <div class="port-item" data-category="marketing">
+      <div class="port-visual pv-3" style="flex-direction:column;gap:1rem">
+        <div class="mock-banner">
+          <div>
+            <div class="mock-logo-sm">EMPRESA X</div>
+            <div style="font-size:0.55rem;color:rgba(255,255,255,0.5);letter-spacing:0.1em">LANÇAMENTO 2024</div>
+          </div>
+          <div style="background:white;color:#2233FF;font-size:0.6rem;font-weight:700;padding:0.3rem 0.7rem;letter-spacing:0.1em">SAIBA MAIS</div>
+        </div>
+        <div style="font-size:0.7rem;letter-spacing:0.2em;color:rgba(255,255,255,0.4)">BANNER DIGITAL</div>
+      </div>
+      <div class="port-overlay">
+        <div class="port-cat">Marketing</div>
+        <div class="port-title-ov">Banner Publicitário Digital</div>
+      </div>
+    </div>
+
+    <div class="port-item" data-category="branding">
+      <div class="port-visual pv-4" style="flex-direction:column;gap:0.8rem">
+        <div style="display:flex;gap:0.8rem">
+          <div class="mock-card">
+            <div style="display:flex;align-items:center;gap:0.4rem">
+              <div class="mc-dot"></div>
+              <div class="mc-line"></div>
+            </div>
+            <div class="mc-line" style="width:50%"></div>
+            <div style="display:flex;gap:4px"><div class="mc-line" style="width:30%"></div></div>
+          </div>
+        </div>
+        <div style="font-size:0.7rem;letter-spacing:0.2em;color:rgba(255,255,255,0.4)">CARTÃO DE VISITA</div>
+      </div>
+      <div class="port-overlay">
+        <div class="port-cat">Branding</div>
+        <div class="port-title-ov">Cartão de Visita Premium</div>
+      </div>
+    </div>
+
+    <div class="port-item" data-category="design-grafico">
+      <div class="port-visual pv-5" style="flex-direction:column;gap:0.8rem;padding:2rem">
+        <div style="width:100%;max-width:180px">
+          <div style="font-family:'Barlow Condensed',sans-serif;font-size:1.8rem;font-weight:900;text-transform:uppercase;letter-spacing:0.1em;color:#fff;line-height:1">PROMOÇÃO<br><span style="color:#2233FF">50% OFF</span></div>
+          <div style="height:2px;background:#2233FF;width:80%;margin:0.5rem 0"></div>
+          <div style="font-size:0.65rem;color:rgba(255,255,255,0.5);letter-spacing:0.1em">VÁLIDO ATÉ 31 DEZ</div>
+        </div>
+        <div style="font-size:0.7rem;letter-spacing:0.2em;color:rgba(255,255,255,0.4)">FLYER PROMOÇÃO</div>
+      </div>
+      <div class="port-overlay">
+        <div class="port-cat">Design Gráfico</div>
+        <div class="port-title-ov">Flyer Promocional</div>
+      </div>
+    </div>
+
+    <div class="port-item" data-category="video">
+      <div class="port-visual pv-6" style="flex-direction:column;gap:0.8rem">
+        <div style="width:60px;height:60px;border-radius:50%;border:2px solid rgba(255,255,255,0.3);display:flex;align-items:center;justify-content:center;font-size:1.8rem">▶</div>
+        <div style="font-size:0.7rem;letter-spacing:0.2em;color:rgba(255,255,255,0.4)">VÍDEO COMERCIAL</div>
+      </div>
+      <div class="port-overlay">
+        <div class="port-cat">Vídeo</div>
+        <div class="port-title-ov">Vídeo Publicitário</div>
+      </div>
+    </div>
+
+    <div class="no-results" id="noResults">Nenhum trabalho nesta categoria ainda.</div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section id="processo">
+  <div class="section-tag">Como Trabalhamos</div>
+  <h2 class="section-title">Nosso<br><span>Processo</span></h2>
+  <div class="process-grid">
+    <div class="process-steps">
+      <div class="process-step"><div class="step-num">01</div><div class="step-content"><h3>Briefing &amp; Descoberta</h3><p>Entendemos profundamente o seu negócio, objectivos e público-alvo para criar uma estratégia visual alinhada.</p></div></div>
+      <div class="process-step"><div class="step-num">02</div><div class="step-content"><h3>Conceito &amp; Estratégia</h3><p>Desenvolvemos conceitos criativos únicos que comunicam a essência da sua marca de forma eficaz.</p></div></div>
+      <div class="process-step"><div class="step-num">03</div><div class="step-content"><h3>Design &amp; Produção</h3><p>Executamos com precisão cada detalhe visual, garantindo qualidade e coerência em todas as peças.</p></div></div>
+      <div class="process-step"><div class="step-num">04</div><div class="step-content"><h3>Revisão &amp; Entrega</h3><p>Refinamos com base no seu feedback e entregamos ficheiros finais prontos para uso em todos os suportes.</p></div></div>
+    </div>
+    <div class="process-visual">
+      <div class="proc-ring">
+        <div class="proc-dot"></div>
+        <div class="proc-center">
+          <div class="proc-m">M</div>
+          <div class="proc-label">Marka</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA / CONTACT -->
+<section id="contato">
+  <h2 class="cta-title">Pronto para <span>Destacar</span><br>a Sua Marca?</h2>
+  <p class="cta-sub">Vamos criar algo extraordinário juntos. Entre em contacto e receba um orçamento personalizado sem compromisso.</p>
+  <div class="cta-actions">
+    <a href="markadevelopment489@gmail.com" class="btn-primary">Pedir Orçamento</a>
+    <a href="https://wa.me/258844718388" class="btn-outline" target="_blank">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+      WhatsApp
+    </a>
+  </div>
+  <div class="contact-row">
+    <div class="contact-item">
+      <span class="contact-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#2233FF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg></span>
+      <span>geral@marka.co.mz</span>
+    </div>
+    <div class="contact-item">
+      <span class="contact-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#2233FF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.4 2 2 0 0 1 3.6 1.22h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.85a16 16 0 0 0 6 6l.85-1.85a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21.5 15h.42"/></svg></span>
+      <span>+258 84 471 8388</span>
+    </div>
+    <div class="contact-item">
+      <span class="contact-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#2233FF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg></span>
+      <span>Cidade de Tete, Moçambique</span>
+    </div>
+    <div class="contact-item">
+      <span class="contact-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#2233FF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></span>
+      <span>Seg–Sex: 7:30–18h &nbsp;|&nbsp; Sáb–Dom: 8–12h</span>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-brand">MAR<span>KA</span></div>
+  <ul class="footer-links">
+    <li><a onclick="navTo('servicos')">Serviços</a></li>
+    <li><a onclick="navTo('portfolio')">Portfólio</a></li>
+    <li><a onclick="navTo('processo')">Processo</a></li>
+    <li><a onclick="navTo('contato')">Contacto</a></li>
+  </ul>
+  <div class="footer-copy">© 2026 MARKA · Criatividade e Inovação</div>
+</footer>
+
+<script>
+  // ── NAVIGATION ──────────────────────────────────────────────
+  function navTo(id) {
+    const el = document.getElementById(id);
+    if (!el) return;
+    const navHeight = document.querySelector('nav').offsetHeight;
+    const top = el.getBoundingClientRect().top + window.scrollY - navHeight;
+    window.scrollTo({ top, behavior: 'smooth' });
+  }
+
+  // ── PORTFOLIO FILTER ────────────────────────────────────────
+  const filterBtns = document.querySelectorAll('.filter-btn');
+  const portItems  = document.querySelectorAll('.port-item');
+  const noResults  = document.getElementById('noResults');
+  const grid       = document.getElementById('portfolioGrid');
+
+  filterBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      // Active state
+      filterBtns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+
+      const filter = btn.dataset.filter;
+
+      let visible = 0;
+      portItems.forEach(item => {
+        const cat = item.dataset.category;
+        if (filter === 'todos' || cat === filter) {
+          item.classList.remove('hidden');
+          visible++;
+        } else {
+          item.classList.add('hidden');
+        }
+      });
+
+      // Show/hide no-results message
+      noResults.classList.toggle('visible', visible === 0);
+
+      // Toggle filtered layout class for grid re-flow
+      grid.classList.toggle('filtered', filter !== 'todos');
+    });
+  });
+
+  // ── SCROLL REVEAL ────────────────────────────────────────────
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.style.opacity = '1';
+        entry.target.style.transform = 'translateY(0)';
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.service-card, .port-item, .process-step').forEach(el => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(20px)';
+    el.style.transition = 'opacity 0.5s ease, transform 0.5s ease, background 0.3s, padding-left 0.3s';
+    observer.observe(el);
+  });
+</script>
+</body>
+</html>
